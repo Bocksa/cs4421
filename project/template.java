@@ -89,12 +89,16 @@ public class template
         cpuInfo cpu = new cpuInfo();
         cpu.read(0);
 
-	CPUReader read = new CPUReader();
-	System.out.println(read.coreCount);	
+	    CPUReader read = new CPUReader();
+	    System.out.println(read.coreCount);	
 
         showCPU();
         showPCI();
         showUSB();
+
+        Thread.sleep(5000);
+
+        System.out.println("CPU Activity Percentage: " + read.GetCPUActivity() + "%");
     }
 }
 
