@@ -1,40 +1,47 @@
-public class CoreReader() {
-    public int coreNumber;
-    public float[] activityPerSecond;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
 
-    // This is the initialiser for the class. It runs whenever you create a new object. (ex. CoreReader reader = new CoreReader())
+public class CoreReader {
+    public int coreNumber;
+    public List<Float> activityPerSecond = new ArrayList<Float>();
+
+    // This is the constructor for the class. It runs whenever you create a new object. (ex. CoreReader reader = new CoreReader())
     public CoreReader(int coreNumber) {
+        System.loadLibrary("sysinfo");
         this.coreNumber = coreNumber;
 
         // Sets up the task scheduler to run updateActivityPerSecond() every second (shouldn't stall the thread I think)
-        final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleAtFixedRate(updateActivityPerSecond, 0, 1, TimeUnit.SECONDS);
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(updateActivityPerSecond, 0, 1000, TimeUnit.MILLISECONDS);
     }
 
     // Adds the current seconds activity percentage to activityPerSecond
-    public updateActivityPerSecond() {
+    Runnable updateActivityPerSecond = () -> {
         cpuInfo cpuRead = new cpuInfo();
-        cpuInfo.read();
+        cpuRead.read(0);
 
-        float activeTime = cpuRead.GetCoreActivity(this.coreNumber);
-        float activityPercentage = activeTime / 100f;
+        float idleTime = cpuRead.getIdleTime(this.coreNumber);
+        float activityPercentage = 1f - (idleTime / 100f);
 
-        activityPerSecond[activityPerSecond.length - 1] = activity; 
-    }
+        activityPerSecond.add(activityPercentage);
+    };
 
     // Gets the total activity percentage for the core
     public float GetCoreActivity() {
         float total = 0f;
         float totalActivityPercentage = 0f;
 
-        if (activityPerSecond.length > 0) {
-            for (int i = 0; i < activityPerSecond.length; i++) {
-                total = total + activityPerSecond[i];
+        if (this.activityPerSecond.size() > 0) {
+            for (int i = 0; i < this.activityPerSecond.size(); i++) {
+                total = total + this.activityPerSecond.get(i);
             }
 
-            totalActivityPercentage = total / activityPerSecond.length;   
+            totalActivityPercentage = total / activityPerSecond.size();   
         }
 
-        return totalActivityPercentage;
+        return totalActivityPercentage * 100f;
     }
 }
