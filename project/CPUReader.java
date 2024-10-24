@@ -26,6 +26,7 @@ public class CPUReader {
         getCores(cpuRead);
     }
 
+    // Gets the average percentage of time the CPU has been active for in the last second.
     public float GetCPUActivity() {
         if (this.coreCount > 0) {
             for (int i = 0; i < this.coreCount; i++) {
