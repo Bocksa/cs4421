@@ -143,16 +143,16 @@ public class template {
         cpu.read(0);
 
         // Ensure valid input
-      while (true) {
+        while (true) {
 
           /*System.out.println("\n\" +\n" +
                           "                  \"█▀▀ █▄░█ ▀█▀ █▀▀ █▀█   █▄█ █▀█ █░█ █▀█   █▀▀ █░█ █▀█ █ █▀▀ █▀▀ ▀\n\" +\n"+
                           "                  \"██▄ █░▀█ ░█░ ██▄ █▀▄   ░█░ █▄█ █▄█ █▀▄   █▄▄ █▀█ █▄█ █ █▄▄ ██▄ ▄ \""); */
-          System.out.println(RED+ "\n" +
-                  "█▀▀ █▄░█ ▀█▀ █▀▀ █▀█   █▄█ █▀█ █░█ █▀█   █▀▀ █░█ █▀█ █ █▀▀ █▀▀ ▀\n" +
-                  "██▄ █░▀█ ░█░ ██▄ █▀▄   ░█░ █▄█ █▄█ █▀▄   █▄▄ █▀█ █▄█ █ █▄▄ ██▄ ▄ ");
+            System.out.println(RED+ "\n" +
+                    "█▀▀ █▄░█ ▀█▀ █▀▀ █▀█   █▄█ █▀█ █░█ █▀█   █▀▀ █░█ █▀█ █ █▀▀ █▀▀ ▀\n" +
+                    "██▄ █░▀█ ░█░ ██▄ █▀▄   ░█░ █▄█ █▄█ █▀▄   █▄▄ █▀█ █▄█ █ █▄▄ ██▄ ▄ ");
             if (input.hasNextInt()) {
-              int num = input.nextInt();  // Get user input
+                int num = input.nextInt();  // Get user input
 
                 // Perform action based on user input
                 switch (num) {
@@ -179,4 +179,4 @@ public class template {
         }
 
     }
-    }
+}
