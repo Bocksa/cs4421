@@ -1,102 +1,147 @@
-/*
- *  Example class containing methods to read and display CPU, PCI and USB information
- *
- *  Copyright (c) 2024 Mark Burkley (mark.burkley@ul.ie)
- */
+import javax.swing.*;
+import java.awt.*;
+import java.util.Scanner;
 
-public class template 
-{
-    public static void showPCI()
-    {
+/*
+ *  Example class containing methods to read and display CPU, PCI, and USB information
+ */
+public class template {
+
+    // Display CPU information in a JFrame
+    public static void showCPUWindow() {
+        cpuInfo cpu = new cpuInfo();
+        cpu.read(0);
+
+        StringBuilder cpuInfoText = new StringBuilder();
+        cpuInfoText.append("CPU ").append(cpu.getModel())
+                .append(" has ").append(cpu.socketCount()).append(" sockets each with ")
+                .append(cpu.coresPerSocket()).append(" cores.\n")
+                .append("L1d Cache Size: ").append(cpu.l1dCacheSize()).append(" KB\n")
+                .append("L1i Cache Size: ").append(cpu.l1iCacheSize()).append(" KB\n")
+                .append("L2 Cache Size: ").append(cpu.l2CacheSize()).append(" KB\n")
+                .append("L3 Cache Size: ").append(cpu.l3CacheSize()).append(" KB\n");
+
+        cpu.read(1);
+        cpuInfoText.append("Core 1 Idle Time: ").append(cpu.getIdleTime(1)).append("%\n");
+
+        // Create window to display CPU info
+        JFrame frame = new JFrame("CPU Information");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 200);
+
+        JLabel label = new JLabel("<html>" + cpuInfoText.toString().replace("\n", "<br>") + "</html>");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        frame.add(label, BorderLayout.CENTER);
+
+        frame.setVisible(true);
+    }
+
+    // Display PCI information in a JFrame
+    public static void showPCIWindow() {
         pciInfo pci = new pciInfo();
         pci.read();
 
-        System.out.println("\nThis machine has "+
-            pci.busCount()+" PCI buses ");
+        StringBuilder pciInfoText = new StringBuilder();
+        pciInfoText.append("This machine has ").append(pci.busCount()).append(" PCI buses.\n");
 
-        // Iterate through each bus
         for (int i = 0; i < pci.busCount(); i++) {
-            System.out.println("Bus "+i+" has "+
-                pci.deviceCount(i)+" devices");
-
-            // Iterate for up to 32 devices.  Not every device slot may be populated
-            // so ensure at least one function before printing device information
+            pciInfoText.append("Bus ").append(i).append(" has ").append(pci.deviceCount(i)).append(" devices.\n");
             for (int j = 0; j < 32; j++) {
-                if (pci.functionCount (i, j) > 0) {
-                    System.out.println("Bus "+i+" device "+j+" has "+
-                        pci.functionCount(i, j)+" functions");
+                if (pci.functionCount(i, j) > 0) {
+                    pciInfoText.append("Bus ").append(i).append(" device ").append(j)
+                            .append(" has ").append(pci.functionCount(i, j)).append(" functions.\n");
 
-                    // Iterate through up to 8 functions per device.
                     for (int k = 0; k < 8; k++) {
-                        if (pci.functionPresent (i, j, k) > 0) {
-                            System.out.println("Bus "+i+" device "+j+" function "+k+
-                                " has vendor "+String.format("0x%04X", pci.vendorID(i,j,k))+
-                                " and product "+String.format("0x%04X", pci.productID(i,j,k)));
+                        if (pci.functionPresent(i, j, k) > 0) {
+                            pciInfoText.append("Bus ").append(i).append(" device ").append(j)
+                                    .append(" function ").append(k)
+                                    .append(" has vendor ").append(String.format("0x%04X", pci.vendorID(i, j, k)))
+                                    .append(" and product ").append(String.format("0x%04X", pci.productID(i, j, k)))
+                                    .append(".\n");
                         }
                     }
                 }
             }
         }
+
+        // Create window to display PCI info
+        JFrame frame = new JFrame("PCI Information");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 300);
+
+        JLabel label = new JLabel("<html>" + pciInfoText.toString().replace("\n", "<br>") + "</html>");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        frame.add(label, BorderLayout.CENTER);
+
+        frame.setVisible(true);
     }
 
-    public static void showUSB()
-    {
+    // Display USB information in a JFrame
+    public static void showUSBWindow() {
         usbInfo usb = new usbInfo();
         usb.read();
-        System.out.println("\nThis machine has "+
-            usb.busCount()+" USB buses ");
 
-        // Iterate through all of the USB buses
+        StringBuilder usbInfoText = new StringBuilder();
+        usbInfoText.append("This machine has ").append(usb.busCount()).append(" USB buses.\n");
+
         for (int i = 1; i <= usb.busCount(); i++) {
-            System.out.println("Bus "+i+" has "+
-                usb.deviceCount(i)+" devices");
+            usbInfoText.append("Bus ").append(i).append(" has ").append(usb.deviceCount(i)).append(" devices.\n");
 
-            // Iterate through all of the USB devices on the bus
             for (int j = 1; j <= usb.deviceCount(i); j++) {
-                System.out.println("Bus "+i+" device "+j+
-                    " has vendor "+String.format("0x%04X", usb.vendorID(i,j))+
-                    " and product "+String.format("0x%04X", usb.productID(i,j)));
+                usbInfoText.append("Bus ").append(i).append(" device ").append(j)
+                        .append(" has vendor ").append(String.format("0x%04X", usb.vendorID(i, j)))
+                        .append(" and product ").append(String.format("0x%04X", usb.productID(i, j)))
+                        .append(".\n");
+            }
+        }
+
+        // Create window to display USB info
+        JFrame frame = new JFrame("USB Information");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        JLabel label = new JLabel("<html>" + usbInfoText.toString().replace("\n", "<br>") + "</html>");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        frame.add(label, BorderLayout.CENTER);
+
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        System.loadLibrary("sysinfo");
+
+        // Take input from the terminal
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose which information to display:");
+        System.out.println("1. CPU Information");
+        System.out.println("2. PCI Information");
+        System.out.println("3. USB Information");
+
+        // Ensure valid input
+        while (true) {
+            if (scanner.hasNextInt()) {
+                int choice = scanner.nextInt();
+
+                // Based on the user input, open a specific window
+                switch (choice) {
+                    case 1:
+                        SwingUtilities.invokeLater(() -> showCPUWindow());
+                        break;
+                    case 2:
+                        SwingUtilities.invokeLater(() -> showPCIWindow());
+                        break;
+                    case 3:
+                        SwingUtilities.invokeLater(() -> showUSBWindow());
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please select a valid option.");
+                        continue; // Loop again for valid input
+                }
+                break; // Exit the loop after valid input is received
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next(); // Consume invalid input
             }
         }
     }
-
-    public static void showCPU()
-    {
-        cpuInfo cpu = new cpuInfo();
-        cpu.read(0);
-
-        // Show CPU model, CPU sockets and cores per socket
-        System.out.println("CPU " + cpu.getModel() + " has "+
-            cpu.socketCount() + " sockets each with "+
-            cpu.coresPerSocket() + " cores");
-
-        // Show sizes of L1,L2 and L3 cache
-        System.out.println("l1d="+cpu.l1dCacheSize()+
-            ", l1i="+cpu.l1iCacheSize()+
-            ", l2="+cpu.l2CacheSize()+
-            ", l3="+cpu.l3CacheSize());
-
-        // Sleep for 1 second and display the idle time percentage for
-        // core 1.  This assumes 10Hz so in one second we have 100
-        cpu.read(1);
-        System.out.println("core 1 idle="+cpu.getIdleTime(1)+"%");
-    }
-
-    public static void main(String[] args)
-    {	
-        System.loadLibrary("sysinfo");
-        sysInfo info = new sysInfo();
-        cpuInfo cpu = new cpuInfo();
-        cpu.read(0);
-
-	    CPUReader cpuReader = new CPUReader();
-	    System.out.println(cpuReader.coreCount);	
-
-        showCPU();
-        showPCI();
-        showUSB();
-
-        System.out.println("CPU Activity Percentage: " + cpuReader.GetCPUActivity() + "%");
-    }
 }
-
