@@ -97,6 +97,7 @@ public class template
         showUSB();
 
         System.out.println("CPU Activity Percentage: " + cpuReader.GetCPUActivity() + "%");
+        System.out.println("Power Consumption: " + powerInfo.GetPowerUsage() + "W");
     }
 }
 
