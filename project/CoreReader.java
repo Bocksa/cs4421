@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.concurrent.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CoreReader {
@@ -20,12 +19,20 @@ public class CoreReader {
     // Adds the current seconds activity percentage to activityPerSecond
     Runnable updateActivityPerSecond = () -> {
         cpuInfo cpuRead = new cpuInfo();
-        cpuRead.read(0);
+        cpuRead.read();
 
-        float idleTime = cpuRead.getIdleTime(this.coreNumber);
-        float activityPercentage = 1f - (idleTime / 100f);
+        long idleTime = cpuRead.getIdleTime(this.coreNumber);
+        long userTime = cpuRead.getUserTime(this.coreNumber);
+        long systemTime = cpuRead.getSystemTime(this.coreNumber);
+        long busyTime = userTime + systemTime;
+        long elapsedTime = idleTime + busyTime;
+        float activityPercentage = ((busyTime / elapsedTime)) * 100f;
 
-        activityPerSecond.add(activityPercentage);
+        if (activityPercentage >= 0) {
+            activityPerSecond.add(((busyTime / (busyTime + idleTime))) * 100f);
+        } else {
+            activityPerSecond.add(0f);
+        }
     };
 
     // Gets the total activity percentage for the core
@@ -33,14 +40,14 @@ public class CoreReader {
         float total = 0f;
         float totalActivityPercentage = 0f;
 
-        if (this.activityPerSecond.size() > 0) {
-            for (int i = 0; i < this.activityPerSecond.size(); i++) {
-                total = total + this.activityPerSecond.get(i);
+        if (!this.activityPerSecond.isEmpty()) {
+            for (Float aFloat : this.activityPerSecond) {
+                total = total + aFloat;
             }
 
             totalActivityPercentage = total / activityPerSecond.size();   
         }
 
-        return totalActivityPercentage * 100f;
+        return totalActivityPercentage;
     }
 }
