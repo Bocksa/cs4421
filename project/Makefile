@@ -3,9 +3,9 @@
 MODULES=sysInfo cpuInfo pciInfo usbInfo
 HEADERS=$(MODULES:=.h)
 
-MYPROJECT=template
+MYPROJECT=Main
 
-all: $(HEADERS) template.class libsysinfo/libsysinfo.so
+all: $(HEADERS) $(MYPROJECT).class libsysinfo/libsysinfo.so
 
 $(MYPROJECT).class: $(MYPROJECT).java libsysinfo/libsysinfo.so
 	javac $<

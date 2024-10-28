@@ -3,7 +3,7 @@
  *
  *  Copyright (c) 2024 Mark Burkley (mark.burkley@ul.ie)
  */
-
+/*
 public class template 
 {
     public static void showPCI()
@@ -98,5 +98,5 @@ public class template
 
         System.out.println("CPU Activity Percentage: " + cpuReader.GetCPUActivity() + "%");
     }
-}
+}*/
 

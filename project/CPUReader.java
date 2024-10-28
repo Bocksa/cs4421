@@ -1,6 +1,14 @@
+/*
+ * Written by Cian McNamara.
+ */
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
+
 public class CPUReader {
-    public CoreReader[] cores;
     public int coreCount;
+    public int socketCount;
+    public int coresPerSocket;
 
     public String model;
     public int l1dCacheSize;
@@ -8,7 +16,7 @@ public class CPUReader {
     public int l2CacheSize;
     public int l3CacheSize;
 
-    private float averageActivityPercentage = 0f;
+    private boolean graphing = false;
 
     // Constructor method for CPUReader. It runs automatically when you create a new object (ex. CPUReader reader = new CPUReader())
     public CPUReader() {
@@ -23,34 +31,48 @@ public class CPUReader {
         this.l2CacheSize = cpuRead.l2CacheSize();
         this.l3CacheSize = cpuRead.l3CacheSize();
 
-        getCores(cpuRead);
-    }
-
-    // Gets the average percentage of time the CPU has been active for in the last second.
-    public float GetCPUActivity() {
-        if (this.coreCount > 0) {
-            for (int i = 0; i < this.coreCount; i++) {
-                System.out.println(cores.length);
-                this.averageActivityPercentage = this.averageActivityPercentage + cores[i].GetCoreActivity();
-            }
-
-            this.averageActivityPercentage = this.averageActivityPercentage / this.coreCount;
-        }
-
-        return this.averageActivityPercentage;
-    }
-
-    /* 
-    /   Private method is an example of encapsulation
-    /   It is used as anyone using the class doesn't need to see it.
-    /   This also reduces confusion when someone is trying to get useful information out.
-    */
-    private void getCores(cpuInfo cpuRead) {
+        this.socketCount = cpuRead.socketCount();
+        this.coresPerSocket = cpuRead.coresPerSocket();
         this.coreCount = cpuRead.socketCount() * cpuRead.coresPerSocket();
-        this.cores = new CoreReader[coreCount];
+    }
 
-        for (int i = 1; i <= this.coreCount; i++) {
-            cores[i-1] = new CoreReader(i);
+    public int GetCPULoad() {
+        OperatingSystemMXBean os = ManagementFactory.getOperatingSystemMXBean();
+        double loadAverage = os.getSystemLoadAverage() * 100;
+        return (int)loadAverage;
+    }
+
+    public void Graph() {
+        this.graphing = true;
+
+        Graph graph = new Graph();
+        graph.x = 0;
+        graph.y = 5;
+        graph.title = "CPU Load Graph: " + this.model;
+        graph.body =
+                "Sockets: " + this.socketCount + "\n" +
+                "Cores: " + this.coreCount + "\n" +
+                "L1 Cache: " + this.l1iCacheSize + this.l1dCacheSize + "B\n" +
+                "L2 Cache: " + this.l2CacheSize + "B\n" +
+                "L3 Cache: " + this.l3CacheSize + "B\n";
+
+        while (graphing == true) {
+            try {
+                int cpuLoad = this.GetCPULoad();
+
+                graph.AddData(cpuLoad);
+                graph.Display();
+
+                Thread.sleep(100);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
+
+        graph.Hide();
+    }
+
+    public void StopGraph() {
+        this.graphing = false;
     }
 }
