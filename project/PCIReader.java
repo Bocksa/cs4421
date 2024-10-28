@@ -27,7 +27,7 @@ public class PCIReader {
                     for (int function = 0; function < 8; function++) {
                         String vendorAndProductString = getPCIVendorAndProductAsString(this.pci.vendorID(bus, device, function), this.pci.productID(bus, device, function));
 
-                        if (!vendorAndProductString.equals("Vendor INVALID and product \"INVALID\".")) {
+                        if (!vendorAndProductString.equals("UNKNOWN UNKNOWN")) {
                             System.out.println("\t\t\t" + vendorAndProductString);
                         }
                     }
@@ -37,8 +37,8 @@ public class PCIReader {
     }
 
     private String getPCIVendorAndProductAsString(int vendorID, int productID) {
-        String VendorName = "INVALID";
-        String ProductName = "INVALID";
+        String VendorName = "UNKNOWN";
+        String ProductName = "UNKNOWN";
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader("pci_devices.csv"));
@@ -57,6 +57,6 @@ public class PCIReader {
             e.printStackTrace();
         }
 
-        return "Vendor " + VendorName + " and product \"" + ProductName + "\".";
+        return VendorName + " " + ProductName;
     }
 }

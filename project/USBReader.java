@@ -5,6 +5,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
 
 public class USBReader {
     public void DisplayUSBInfo() {
@@ -18,8 +19,36 @@ public class USBReader {
         for (int bus = 1; bus <= usb.busCount(); bus++) {
             System.out.println("\tBus " + bus + ":" );
             for (int device = 1; device <= usb.deviceCount(bus); device++) {
-                System.out.println(String.format("\t\tVendor 0x%04X Product 0x%04X", usb.vendorID(bus, device), usb.productID(bus, device)));
+                String vendorAndProductString = getUSBVendorAndProductAsString(usb.vendorID(bus, device), usb.productID(bus, device));
+
+                if (!vendorAndProductString.equals("UNKNOWN UNKNOWN")) {
+                    System.out.println("\t\t\t" + vendorAndProductString);
+                }
             }
         }
+    }
+
+    private String getUSBVendorAndProductAsString(int vendorID, int productID) {
+        String VendorName = "UNKNOWN";
+        String ProductName = "UNKNOWN";
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("usb_devices.csv"));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] products = line.split(",");
+                if (!products[0].equals("Vendor ID")) {
+                    if (Integer.parseInt(products[0], 16) == vendorID && Integer.parseInt(products[2], 16) == productID) {
+                        VendorName = products[1];
+                        ProductName = products[3];
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return VendorName + " " + ProductName;
     }
 }
