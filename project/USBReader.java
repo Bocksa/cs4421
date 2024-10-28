@@ -17,37 +17,9 @@ public class USBReader {
 
         for (int bus = 1; bus <= usb.busCount(); bus++) {
             System.out.println("\tBus " + bus + ":" );
-            for (int device = 1; device < usb.deviceCount(bus); device++) {
-                String vendorAndProductString = getPCIVendorAndProductAsString(usb.vendorID(bus, device), usb.productID(bus, device));
-
-                if (!vendorAndProductString.equals("Vendor INVALID and product \"INVALID\".")) {
-                    System.out.println("\t\t " + vendorAndProductString);
-                }
+            for (int device = 1; device <= usb.deviceCount(bus); device++) {
+                System.out.println("\t\tVendor " + usb.vendorID(bus, device) + " Product " + usb.productID(bus, device));
             }
         }
-    }
-
-    private String getPCIVendorAndProductAsString(int vendorID, int productID) {
-        String VendorName = "INVALID";
-        String ProductName = "INVALID";
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("usb_devices.csv"));
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                String[] products = line.split(",");
-                if (!products[0].equals("vendor")) {
-                    if (Integer.parseInt(products[0], 16) == vendorID && Integer.parseInt(products[2], 16) == productID) {
-                        VendorName = products[1];
-                        ProductName = products[3];
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "Vendor " + VendorName + " and product \"" + ProductName + "\".";
     }
 }
