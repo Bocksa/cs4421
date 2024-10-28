@@ -18,7 +18,7 @@ public class USBReader {
         for (int bus = 1; bus <= usb.busCount(); bus++) {
             System.out.println("\tBus " + bus + ":" );
             for (int device = 1; device <= usb.deviceCount(bus); device++) {
-                System.out.println("\t\tVendor " + usb.vendorID(bus, device) + " Product " + usb.productID(bus, device));
+                System.out.println(String.format("\t\tVendor 0x%04X Product 0x%04X", usb.vendorID(bus, device), usb.productID(bus, device)));
             }
         }
     }
