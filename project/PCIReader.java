@@ -22,7 +22,7 @@ public class PCIReader {
 
             for (int device = 0; device < this.pci.deviceCount(bus); device++) {
                 if (this.pci.functionCount(bus, device) > 0) {
-                    System.out.println("\t\tDevice " + device + " has:");
+                    System.out.println("\t\tDevice " + device + ":");
 
                     for (int function = 0; function < 8; function++) {
                         String vendorAndProductString = getPCIVendorAndProductAsString(this.pci.vendorID(bus, device, function), this.pci.productID(bus, device, function));
