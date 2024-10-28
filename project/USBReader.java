@@ -32,7 +32,7 @@ public class USBReader {
         String ProductName = "INVALID";
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("project/usb_devices.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("usb_devices.csv"));
             String line;
 
             while ((line = reader.readLine()) != null) {
