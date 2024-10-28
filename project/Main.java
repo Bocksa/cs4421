@@ -2,35 +2,44 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        MainMenu();
+    }
 
-        while (true) {
-            System.out.println("Select an option below:");
-            System.out.println("1. CPU Info");
-            System.out.println("2. PCI Info");
-            System.out.println("3. USB Info");
+    public static void MainMenu() {
+        try {
+            Scanner sc = new Scanner(System.in);
 
-            int input = sc.nextInt();
+            while (true) {
+                System.out.println("Select an option below:");
+                System.out.println("1. CPU Info");
+                System.out.println("2. PCI Info");
+                System.out.println("3. USB Info");
 
-            ClearScreen();
+                int input = sc.nextInt();
 
-            try {
-                switch (input) {
-                    case 1:
-                        CPUMenu();
-                        return;
-                    case 2:
-                        PCIMenu();
-                        return;
-                    case 3:
-                        USBMenu();
-                        return;
-                    default:
-                        System.out.println("Invalid option, try again. \n");
+                ClearScreen();
+
+                try {
+                    switch (input) {
+                        case 1:
+                            CPUMenu();
+                            return;
+                        case 2:
+                            PCIMenu();
+                            return;
+                        case 3:
+                            USBMenu();
+                            return;
+                        default:
+                            System.out.println("Invalid option, try again. \n");
+                    }
+                } catch (RuntimeException e) {
+                    System.out.println("Invalid choice, try again. \n");
                 }
-            } catch (RuntimeException e) {
-                e.printStackTrace();
             }
+        } catch(RuntimeException e) {
+            System.out.println("Invalid choice, please pick a number.\n");
+            MainMenu();
         }
     }
 
