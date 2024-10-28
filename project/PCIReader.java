@@ -1,5 +1,8 @@
+/*
+ * Written by Cian McNamara.
+ */
+
 import java.io.*;
-import java.util.Scanner;
 
 public class PCIReader {
     private pciInfo pci;

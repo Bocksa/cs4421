@@ -1,3 +1,7 @@
+/*
+ * Written by Cian McNamara.
+ */
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -5,7 +9,9 @@ import java.io.IOException;
 public class USBReader {
     public void DisplayUSBInfo() {
         System.loadLibrary("sysinfo");
+
         usbInfo usb = new usbInfo();
+        usb.read();
 
         System.out.println("USB Buses: " + usb.busCount());
 
