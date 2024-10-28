@@ -57,7 +57,7 @@ public:
     int functionPresent (int bus, int device, int function) { return _bus[bus].device[device].function[function].present; }
     int vendorID (int bus, int device, int function) { return _bus[bus].device[device].function[function].vendor; }
     int productID (int bus, int device, int function) { return _bus[bus].device[device].function[function].product; }
-    static const int maxBus = 0x10001;
+    static const int maxBus = 64;
 
 private:
     int _busCount;
@@ -73,10 +73,10 @@ void PCIInfo::_parseDevice (char buffer[])
     istringstream stream(line);
     int location;
     unsigned int ident;
-    
+
     stream >> hex >> location >> ident;
     // cout << "loc=" << hex << location << ", id=" << ident << endl;
-    
+
     int bus = location >> 8;
     assert (bus < maxBus);
     int device = (location & 0xf8) >> 3;
@@ -101,7 +101,7 @@ void PCIInfo::_parseDevice (char buffer[])
 
 void PCIInfo::read()
 {
-    std::array<char, 1024> buffer;
+    std::array<char, 4096> buffer;
     std::unique_ptr<FILE, decltype(&fclose)> stat(fopen("/proc/bus/pci/devices", "r"), fclose);
 
     if (!stat) {
@@ -139,4 +139,3 @@ JNIEXPORT jint JNICALL Java_pciInfo_vendorID (JNIEnv *env, jobject obj, jint bus
 JNIEXPORT jint JNICALL Java_pciInfo_productID (JNIEnv *env, jobject obj, jint bus, jint device, jint function) {
     return pci.productID (bus, device, function);
 }
-

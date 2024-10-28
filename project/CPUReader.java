@@ -2,8 +2,14 @@
  * Written by Cian McNamara.
  */
 
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class CPUReader {
     public int coreCount;
@@ -16,7 +22,7 @@ public class CPUReader {
     public int l2CacheSize;
     public int l3CacheSize;
 
-    private boolean graphing = false;
+    private Graph graph;
 
     // Constructor method for CPUReader. It runs automatically when you create a new object (ex. CPUReader reader = new CPUReader())
     public CPUReader() {
@@ -42,37 +48,27 @@ public class CPUReader {
         return (int)loadAverage;
     }
 
-    public void Graph() {
-        this.graphing = true;
-
-        Graph graph = new Graph();
-        graph.x = 0;
-        graph.y = 5;
-        graph.title = "CPU Load Graph: " + this.model;
-        graph.body =
+    public void DisplayInformation() {
+        this.graph = new Graph();
+        this.graph.x = 0;
+        this.graph.y = 5;
+        this.graph.title = "CPU Load Graph: " + this.model;
+        this.graph.body =
                 "Sockets: " + this.socketCount + "\n" +
                 "Cores: " + this.coreCount + "\n" +
-                "L1 Cache: " + this.l1iCacheSize + this.l1dCacheSize + "B\n" +
-                "L2 Cache: " + this.l2CacheSize + "B\n" +
-                "L3 Cache: " + this.l3CacheSize + "B\n";
+                "L1 Cache: " + (this.l1iCacheSize + this.l1dCacheSize) / Math.pow(2,10) + "KB\n" +
+                "L2 Cache: " + (this.l2CacheSize / Math.pow(2,20)) + "MB\n" +
+                "L3 Cache: " + (this.l3CacheSize / Math.pow(2,20)) + "MB\n";
 
-        while (graphing == true) {
+        while (true) {
             try {
-                int cpuLoad = this.GetCPULoad();
-
-                graph.AddData(cpuLoad);
-                graph.Display();
-
+                int cpuLoad = GetCPULoad();
+                this.graph.AddData(cpuLoad);
                 Thread.sleep(100);
-            } catch (Exception e) {
-                System.out.println(e);
+                this.graph.Display();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
-
-        graph.Hide();
-    }
-
-    public void StopGraph() {
-        this.graphing = false;
     }
 }

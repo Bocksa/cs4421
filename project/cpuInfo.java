@@ -4,7 +4,7 @@
  *  Copyright (c) 2024 Mark Burkley (mark.burkley@ul.ie)
  */
 
-public class cpuInfo 
+public class cpuInfo
 {
     // Refresh the current values and counters - call this before other methods
     public native void read (int seconds);
