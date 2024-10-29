@@ -69,7 +69,8 @@ public class Main {
 
     // Removed as it does not allow read to be run. (Tried with sysinfo loaded and unloaded, both options did not work. Template file also errors ever since the changes.)
     public static void DiskMenu() {
-        System.out.println("\ndiskInfo class currently has an error when you run diskInfo.read(). As a result it is not being used currently.\n");
+       DiskReader disk = new DiskReader();
+       disk.
     }
 
     public static void PCIMenu() {
