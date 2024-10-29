@@ -2,14 +2,8 @@
  * Written by Cian McNamara.
  */
 
-import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class CPUReader {
     public int coreCount;

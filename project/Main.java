@@ -4,25 +4,24 @@ public class Main {
     public static void main(String[] args) {
         MainMenu();
     }
-    //public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
 
     /// <summary>Displays the main menu.</summary>
     public static void MainMenu() {
         try {
             Scanner sc = new Scanner(System.in);
 
-            String RED = "\u001B[31m";
-            String BLACK = "\u001B[30m";
-            String GREEN = 	"\u001B[32m";;
-            String YELLOW = "\u001B[33m";
-            String BLUE	 = "\u001B[34m";
-            String PURPLE = "\u001B[35m";
-            String CYAN = 	"\u001B[36m";
-            String RESET = "\u001B[0m";
+            final String ANSI_RESET = "\u001B[0m";
+            final String ANSI_BLACK = "\u001B[30m";
+            final String ANSI_RED = "\u001B[31m";
+            final String ANSI_GREEN = "\u001B[32m";
+            final String ANSI_YELLOW = "\u001B[33m";
+            final String ANSI_BLUE = "\u001B[34m";
+            final String ANSI_PURPLE = "\u001B[35m";
+            final String ANSI_CYAN = "\u001B[36m";
+            final String ANSI_WHITE = "\u001B[37m";
 
             while (true) {
-                System.out.println(BLUE + "\n" +
+                System.out.println("\n" + ANSI_RED +
                         "░██████╗███████╗██╗░░░░░███████╗░█████╗░████████╗  ░█████╗░███╗░░██╗\n" +
                         "██╔════╝██╔════╝██║░░░░░██╔════╝██╔══██╗╚══██╔══╝  ██╔══██╗████╗░██║\n" +
                         "╚█████╗░█████╗░░██║░░░░░█████╗░░██║░░╚═╝░░░██║░░░  ███████║██╔██╗██║\n" +
@@ -35,14 +34,14 @@ public class Main {
                         "██║░░██║██████╔╝░░░██║░░░██║██║░░██║██╔██╗██║  ██████╦╝█████╗░░██║░░░░░██║░░██║░╚██╗████╗██╔╝░░░\n" +
                         "██║░░██║██╔═══╝░░░░██║░░░██║██║░░██║██║╚████║  ██╔══██╗██╔══╝░░██║░░░░░██║░░██║░░████╔═████║░░░░\n" +
                         "╚█████╔╝██║░░░░░░░░██║░░░██║╚█████╔╝██║░╚███║  ██████╦╝███████╗███████╗╚█████╔╝░░╚██╔╝░╚██╔╝░██╗\n" +
-                        "░╚════╝░╚═╝░░░░░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝  ╚═════╝░╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝░░╚═╝" + RESET);
+                        "░╚════╝░╚═╝░░░░░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝  ╚═════╝░╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝░░╚═╝" + ANSI_RESET);
 
 
-                System.out.println( "\n█████████████████████████████████████████████████████████████████████████████████████████████████");
+                System.out.println("\n█████████████████████████████████████████████████████████████████████████████████████████████████" + ANSI_RESET);
 
 
 
-                System.out.println(PURPLE + "\n" +
+                System.out.println(ANSI_PURPLE + "\n" +
                         "░░███╗░░░░░  ░█████╗░██████╗░██╗░░░██╗    ██████╗░░░░  ██████╗░░█████╗░██╗  \n" +
                         "░████║░░░░░  ██╔══██╗██╔══██╗██║░░░██║    ╚════██╗░░░  ██╔══██╗██╔══██╗██║  \n" +
                         "██╔██║░░░░░  ██║░░╚═╝██████╔╝██║░░░██║    ░░███╔═╝░░░  ██████╔╝██║░░╚═╝██║  \n" +
@@ -55,7 +54,7 @@ public class Main {
                         "░█████╔╝░░░  ██║░░░██║╚█████╗░██████╦╝    ██╔╝░██║░░░  ██║░░██║██║╚█████╗░█████═╝░\n" +
                         "░╚═══██╗░░░  ██║░░░██║░╚═══██╗██╔══██╗    ███████║░░░  ██║░░██║██║░╚═══██╗██╔═██╗░\n" +
                         "██████╔╝██╗  ╚██████╔╝██████╔╝██████╦╝    ╚════██║██╗  ██████╔╝██║██████╔╝██║░╚██╗\n" +
-                        "╚═════╝░╚═╝  ░╚═════╝░╚═════╝░╚═════╝░    ░░░░░╚═╝╚═╝  ╚═════╝░╚═╝╚═════╝░╚═╝░░╚═╝" + RESET);
+                        "╚═════╝░╚═╝  ░╚═════╝░╚═════╝░╚═════╝░    ░░░░░╚═╝╚═╝  ╚═════╝░╚═╝╚═════╝░╚═╝░░╚═╝" + ANSI_RESET);
 
 
                 int input = sc.nextInt();
@@ -76,6 +75,9 @@ public class Main {
                         case 4:
                             DiskMenu();
                             return;
+                        case 5:
+                            MemoryMenu();
+                            return;
                         default:
                             System.out.println("Invalid option, try again. \n");
                     }
@@ -89,7 +91,7 @@ public class Main {
         }
     }
 
-    /// <summary></summary>
+    /// <summary>Clears the console.</summary>
     public static void ClearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -101,7 +103,7 @@ public class Main {
         cpu.DisplayInformation();
     }
 
-    // Removed as it does not allow read to be run. (Tried with sysinfo loaded and unloaded, both options did not work. Template file also errors ever since the changes.)
+    /// <summary>Displays all the information in the disk menu.</summary>
     public static void DiskMenu() {
        DiskReader disk = new DiskReader();
        disk.DisplayDiskInfo();
@@ -117,5 +119,11 @@ public class Main {
     public static void USBMenu() {
         USBReader usb = new USBReader();
         usb.DisplayUSBInfo();
+    }
+
+    /// <summary>Displays all the information in the CPU menu.</summary>
+    public static void MemoryMenu() {
+        MemoryReader memory = new MemoryReader();
+        memory.DisplayMemoryInformation();
     }
 }
