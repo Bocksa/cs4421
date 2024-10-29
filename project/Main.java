@@ -38,16 +38,16 @@ public class Main {
                     switch (input) {
                         case 1:
                             CPUMenu();
-                            break;
+                            return;
                         case 2:
                             PCIMenu();
-                            break;
+                            return;
                         case 3:
                             USBMenu();
-                            break;
+                            return;
                         case 4:
                             DiskMenu();
-                            break;
+                            return;
                         default:
                             System.out.println("Invalid option, try again. \n");
                     }
