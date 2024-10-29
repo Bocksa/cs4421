@@ -12,7 +12,7 @@ public class MemoryReader {
         this.graph = new Graph();
         this.graph.x = 0;
         this.graph.y = 3;
-        this.graph.title = "Memory Load Graph " + Math.round((memory.getTotal() / Math.pow(2,20)) * 10) / 10f + " GB)";
+        this.graph.title = "Memory Load Graph (" + Math.round((memory.getTotal() / Math.pow(2,20)) * 10) / 10f + " GB)";
         this.graph.body =
                 "Memory in use: " + Math.round((memory.getUsed() / Math.pow(2,20) ) * 10) + "/" + Math.round((memory.getTotal() / Math.pow(2,20) ) * 10) + " GB\n";
 
