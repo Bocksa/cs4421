@@ -3,7 +3,7 @@
  */
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
+import com.sun.management.OperatingSystemMXBean;
 
 public class CPUReader {
     public int coreCount;
@@ -37,8 +37,8 @@ public class CPUReader {
     }
 
     public int GetCPULoad() {
-        OperatingSystemMXBean os = ManagementFactory.getOperatingSystemMXBean();
-        double loadAverage = os.getSystemLoadAverage() * 100;
+        OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        double loadAverage = os.getCpuLoad() * 100;
         return (int)loadAverage;
     }
 
