@@ -63,7 +63,7 @@ public class Graph {
                 System.out.println(splitBody[offset]);
             }
 
-            this.bodyDisplayed = true;
+            //this.bodyDisplayed = true;
         }
     }
 
@@ -71,6 +71,12 @@ public class Graph {
     public void Hide() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public void ClearBodyFirstLine() {
+        setCursorPosition(this.x, this.y + 20);
+        System.out.print(repeatCharacter(' ', 100));
+        this.bodyDisplayed = false;
     }
 
     /// <summary>Creates an array of graph characters from a given input int[] array.</summary>

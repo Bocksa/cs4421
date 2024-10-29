@@ -7,24 +7,28 @@ public class MemoryReader {
 
     public void DisplayMemoryInformation() {
         memInfo memory = new memInfo();
+        memory.read();
 
         this.graph = new Graph();
         this.graph.x = 0;
-        this.graph.y = 5;
-        this.graph.title = "Memory Load Graph";
+        this.graph.y = 3;
+        this.graph.title = "Memory Load Graph " + Math.round((memory.getTotal() / Math.pow(2,20)) * 10) / 10f + " GB)";
+        this.graph.body =
+                "Memory in use: " + Math.round((memory.getUsed() / Math.pow(2,20) ) * 10) + "/" + Math.round((memory.getTotal() / Math.pow(2,20) ) * 10) + " GB\n";
 
         while (true) {
             try {
                 memory.read();
-                int usedMemory = memory.getUsed();
-                int totalMemory = memory.getTotal();
-                int memoryPercentage = (int)((usedMemory / (float)totalMemory) * 100);
+                float usedMemory = Math.round((memory.getUsed() / Math.pow(2, 20)) * 10) / 10f;
+                float totalMemory = Math.round((memory.getTotal() / Math.pow(2,20)) * 10) / 10f;
+                int memoryPercentage = (int)((usedMemory / totalMemory) * 100);
+
                 this.graph.AddData(memoryPercentage);
                 this.graph.body =
-                                "Memory Used: " + memory.getUsed() / Math.pow(2,20) + "GB\n" +
-                                "Total Memory: " + memory.getTotal() / Math.pow(2,20) + "GB\n";
-                Thread.sleep(100);
+                        "Memory in use: " + usedMemory + "/" + totalMemory + " GB\n";
                 this.graph.Display();
+
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
