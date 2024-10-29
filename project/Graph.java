@@ -17,7 +17,7 @@ public class Graph {
 
     private List<Integer> graphData = new ArrayList<Integer>();
 
-    ///<summary>
+    /// <summary>
     /// Creates a Graph which is 20 blocks wide.
     /// </summary>
     public Graph() {
@@ -39,7 +39,7 @@ public class Graph {
         this.graphData = tempList;
     }
 
-    ///<summary>Displays the graph, its title and its body in the console.</summary>
+    /// <summary>Displays the graph, its title and its body in the console.</summary>
     public void Display() {
         Integer[] graphArray = graphData.toArray(new Integer[0]);
         String[] linedGraphArray = getGraphFromArray(graphArray).split("\n");
@@ -67,6 +67,7 @@ public class Graph {
         }
     }
 
+    /// <summary>Hides the graph.</summary>
     public void Hide() {
         System.out.print("\033[H\033[2J");
         System.out.flush();

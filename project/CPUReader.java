@@ -2,14 +2,8 @@
  * Written by Cian McNamara.
  */
 
-import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import com.sun.management.OperatingSystemMXBean;
 
 public class CPUReader {
     public int coreCount;
@@ -43,8 +37,8 @@ public class CPUReader {
     }
 
     public int GetCPULoad() {
-        OperatingSystemMXBean os = ManagementFactory.getOperatingSystemMXBean();
-        double loadAverage = os.getSystemLoadAverage() * 100;
+        OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        double loadAverage = os.getCpuLoad() * 100;
         return (int)loadAverage;
     }
 

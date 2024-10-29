@@ -14,17 +14,17 @@ Vendor ID,Vendor Name,Device ID,Device Name
 0079,DragonRise Inc.,1843,Mayflash GameCube Controller Adapter
 0079,DragonRise Inc.,1844,Mayflash GameCube Controller
 0080,Unknown,a001,JMS578 based SATA bridge
-0085,"Boeye Technology Co., Ltd.",0600,eBook Reader
+0085,"Boeye Technology Co. Ltd.",0600,eBook Reader
 0105,Trust International B.V.,145f,NW-3100 802.11b/g 54Mbps Wireless Network Adapter [zd1211]
 0127,IBP,0002,HDM Interface
 0127,IBP,0127,ibp
 0145,Unknown,0112,Card Reader
 017c,MLK,145f,Trust Deskset
 0200,TP-Link,0201,MA180 UMTS Modem
-0204,"Chipsbank Microelectronics Co., Ltd",6025,CBM2080 / CBM2090 Flash drive controller
-0204,"Chipsbank Microelectronics Co., Ltd",6026,CBM1180 Flash drive controller
+0204,"Chipsbank Microelectronics Co. Ltd",6025,CBM2080 / CBM2090 Flash drive controller
+0204,"Chipsbank Microelectronics Co. Ltd",6026,CBM1180 Flash drive controller
 0218,Hangzhou Worlde,0301,MIDI Port
-02ad,"HUMAX Co., Ltd.",138c,PVR Mass Storage
+02ad,"HUMAX Co. Ltd.",138c,PVR Mass Storage
 0324,OCZ Technology Inc,bc06,OCZ ATV USB 2.0 Flash Drive
 0324,OCZ Technology Inc,bc08,OCZ Rally2/ATV USB 2.0 Flash Drive
 0325,OCZ Technology Inc,ac02,ATV Turbo / Rally2 Dual Channel USB 2.0 Flash Drive
@@ -32,7 +32,7 @@ Vendor ID,Vendor Name,Device ID,Device Name
 03c3,ZWO,120e,ASI120MC-S Planetary Camera
 03c3,ZWO,1f10,EFF
 03c3,ZWO,294f,ASI294MC Pro
-03d9,"Shenzhen Sinote Tech-Electron Co., Ltd",0499,SE340D PC Remote Control
+03d9,"Shenzhen Sinote Tech-Electron Co. Ltd",0499,SE340D PC Remote Control
 03da,Bernd Walter Computer Technology,0002,HD44780 LCD interface
 03e7,Intel,2150,Myriad VPU [Movidius Neural Compute Stick]
 03e7,Intel,2485,Movidius MyriadX

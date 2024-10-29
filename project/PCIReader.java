@@ -11,6 +11,7 @@ public class PCIReader {
         this.pci = new pciInfo();
     }
 
+    /// <summary>Prints the USB information to the console.</summary>
     public void DisplayPCIInfo() {
         System.loadLibrary("sysinfo");
         this.pci.read();
@@ -36,6 +37,9 @@ public class PCIReader {
         }
     }
 
+    /// <summary>Outputs a string of the PCI devices vendor and product name split by a colon.</summary>
+    /// @param vendorID The products vendor base 16 id.
+    /// @param productID The products product base 16 id.
     private String getPCIVendorAndProductAsString(int vendorID, int productID) {
         String VendorName = "UNKNOWN";
         String ProductName = "UNKNOWN";

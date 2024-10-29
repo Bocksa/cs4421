@@ -5,6 +5,7 @@ public class Main {
         MainMenu();
     }
 
+    /// <summary>Displays the main menu.</summary>
     public static void MainMenu() {
         try {
             Scanner sc = new Scanner(System.in);
@@ -37,18 +38,21 @@ public class Main {
                     switch (input) {
                         case 1:
                             CPUMenu();
-                            return;
+                            break;
                         case 2:
                             PCIMenu();
-                            return;
+                            break;
                         case 3:
                             USBMenu();
-                            return;
+                            break;
+                        case 4:
+                            DiskMenu();
+                            break;
                         default:
                             System.out.println("Invalid option, try again. \n");
                     }
                 } catch (RuntimeException e) {
-                    System.out.println("Invalid choice, try again. \n");
+                    e.printStackTrace();
                 }
             }
         } catch(RuntimeException e) {
@@ -57,11 +61,13 @@ public class Main {
         }
     }
 
+    /// <summary></summary>
     public static void ClearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
+    /// <summary>Displays all the information in the CPU menu.</summary>
     public static void CPUMenu() {
         CPUReader cpu = new CPUReader();
         cpu.DisplayInformation();
@@ -70,14 +76,16 @@ public class Main {
     // Removed as it does not allow read to be run. (Tried with sysinfo loaded and unloaded, both options did not work. Template file also errors ever since the changes.)
     public static void DiskMenu() {
        DiskReader disk = new DiskReader();
-       disk.
+       disk.DisplayDiskInfo();
     }
 
+    /// <summary>Displays all the information in the PCI menu.</summary>
     public static void PCIMenu() {
         PCIReader pci = new PCIReader();
         pci.DisplayPCIInfo();
     }
 
+    /// <summary>Displays all the information in the CPU menu.</summary>
     public static void USBMenu() {
         USBReader usb = new USBReader();
         usb.DisplayUSBInfo();
