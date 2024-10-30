@@ -36,13 +36,16 @@ public class CPUReader {
         this.coreCount = cpuRead.socketCount() * cpuRead.coresPerSocket();
     }
 
+    /// <summary>Gets the CPU load as a rounded percentage.</summary>
+    /// <returns></returns>
     public int GetCPULoad() {
         OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         double loadAverage = os.getCpuLoad() * 100;
         return (int)loadAverage;
     }
 
-    public void DisplayInformation() {
+    /// <summary>Displays all the CPU info.</summary>
+    public void DisplayCPUInfo() {
         this.graph = new Graph();
         this.graph.x = 0;
         this.graph.y = 5;

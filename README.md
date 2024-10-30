@@ -16,3 +16,7 @@ please ask and I will add them.
 
 ## Team  
 ### Sreejita Saha, Oran Fleming, Cian McNamara and Fionn Ó Murchú
+
+## Notes
+This project is intended to be run in fullscreen,
+this is to avoid any graphical mishaps that may occur otherwise.

@@ -107,7 +107,7 @@ public class Main {
     /// <summary>Displays all the information in the CPU menu.</summary>
     public static void CPUMenu() {
         CPUReader cpu = new CPUReader();
-        cpu.DisplayInformation();
+        cpu.DisplayCPUInfo();
     }
 
     /// <summary>Displays all the information in the disk menu.</summary>
@@ -131,6 +131,6 @@ public class Main {
     /// <summary>Displays all the information in the CPU menu.</summary>
     public static void MemoryMenu() {
         MemoryReader memory = new MemoryReader();
-        memory.DisplayMemoryInformation();
+        memory.DisplayMemoryInfo();
     }
 }

@@ -7,6 +7,7 @@ import java.io.*;
 public class PCIReader {
     private pciInfo pci;
 
+    /// <summary>PCIReader constructor method.</summary>
     public PCIReader() {
         this.pci = new pciInfo();
     }

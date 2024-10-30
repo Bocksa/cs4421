@@ -18,7 +18,7 @@ public class Graph {
     private List<Integer> graphData = new ArrayList<Integer>();
 
     /// <summary>
-    /// Creates a Graph which is 20 blocks wide.
+    /// Constructor method which creates a Graph which is a maximum of 20 blocks wide.
     /// </summary>
     public Graph() {
         this.maxData = 20;
@@ -65,18 +65,6 @@ public class Graph {
 
             //this.bodyDisplayed = true;
         }
-    }
-
-    /// <summary>Hides the graph.</summary>
-    public void Hide() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    public void ClearBodyFirstLine() {
-        setCursorPosition(this.x, this.y + 20);
-        System.out.print(repeatCharacter(' ', 100));
-        this.bodyDisplayed = false;
     }
 
     /// <summary>Creates an array of graph characters from a given input int[] array.</summary>

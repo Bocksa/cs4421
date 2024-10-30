@@ -1,11 +1,13 @@
 public class MemoryReader {
     Graph graph;
 
+    /// <summary>Constructor method for MemoryReader.</summary>
     public MemoryReader() {
         System.loadLibrary("sysinfo");
     }
 
-    public void DisplayMemoryInformation() {
+    /// <summary>Displays all the memory information on the console.</summary>
+    public void DisplayMemoryInfo() {
         memInfo memory = new memInfo();
         memory.read();
 
@@ -13,8 +15,6 @@ public class MemoryReader {
         this.graph.x = 0;
         this.graph.y = 3;
         this.graph.title = "Memory Load Graph (" + Math.round((memory.getTotal() / Math.pow(2,20)) * 10) / 10f + " GB)";
-        this.graph.body =
-                "Memory in use: " + Math.round((memory.getUsed() / Math.pow(2,20) ) * 10) + "/" + Math.round((memory.getTotal() / Math.pow(2,20) ) * 10) + " GB\n";
 
         while (true) {
             try {
@@ -25,7 +25,7 @@ public class MemoryReader {
 
                 this.graph.AddData(memoryPercentage);
                 this.graph.body =
-                        "Memory in use: " + usedMemory + "/" + totalMemory + " GB\n";
+                        "Memory in use: " + usedMemory + "/" + totalMemory + " GB  \n";
                 this.graph.Display();
 
                 Thread.sleep(100);
