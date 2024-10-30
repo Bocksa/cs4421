@@ -1,4 +1,4 @@
-# cs4421
+# CS4421
 This code supports the module CS4421 computer organisation end of block project.
 
 To build from the command line, cd into the project directory and type "make".  To run, type "./run.sh".
@@ -14,7 +14,7 @@ called from Java.  This library is written in C++ and can be used as is without 
 to understand or modify this library, but can if they wish.  If there any features missing that you would like to see,
 please ask and I will add them.
 
-## Team  
+## Team 2  
 ### Sreejita Saha, Oran Fleming, Cian McNamara and Fionn Ó Murchú
 
 ## Notes
